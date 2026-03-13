@@ -40,11 +40,22 @@ export default function HomePage() {
       >
         {/* ── Imagem de fundo — hero ── */}
         <img
-  src={heroKryska}
-  alt=""
-  aria-hidden="true"
-  ...
-/>
+          src={heroKryska}
+          alt=""
+          aria-hidden="true"
+          className="absolute pointer-events-none select-none"
+          style={{
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center',
+            opacity: 0.28,
+            filter: 'grayscale(20%) brightness(0.85) sepia(0.3) hue-rotate(310deg) saturate(1.2)',
+            zIndex: 0,
+          }}
+        />
 
         {/* Blobs decorativos rosa claro */}
         <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', overflow: 'hidden' }}>
