@@ -39,7 +39,7 @@ export default function HomePage() {
       >
         {/* ── Imagem de fundo — hero ── */}
         <img
-          src="/kryska.png"
+          src="https://www.kryska.com.br/kryska.png"
           alt=""
           aria-hidden="true"
           className="absolute pointer-events-none select-none"

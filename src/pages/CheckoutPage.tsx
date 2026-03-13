@@ -184,7 +184,7 @@ export default function CheckoutPage() {
         top: 0,
         zIndex: 100
       }}>
-        <img src="/kryskalogo.png" alt="Kryska" style={{ height: 36 }} />
+        <img src="https://www.kryska.com.br/kryskalogo.png" alt="Kryska" style={{ height: 36 }} />
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#16a34a', fontSize: 13, fontWeight: 600 }}>
           <Lock size={14} />
           Pagamento 100% seguro
