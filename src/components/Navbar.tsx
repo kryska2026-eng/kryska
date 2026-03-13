@@ -40,7 +40,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
             <img
-              src="http://www.kryska.com.br/kryskalogo.png"
+              src="/kryskalogo.png"
               alt="Kryska"
               style={{ height: 40, width: 'auto', objectFit: 'contain' }}
             />

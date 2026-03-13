@@ -5,7 +5,8 @@ import {
   AlertCircle, Clock, ChevronRight, Lock, ArrowLeft,
   Zap, Star, TrendingUp
 } from 'lucide-react'
-import { PLANS, BOOST_PACKS, MEDIA_PACKS, PlanItem } from '../hooks/useMercadoPago'
+import { PLANS, BOOST_PACKS, MEDIA_PACKS, PlanItem, useMercadoPago } from '../hooks/useMercadoPago'
+import { useAuth } from '../contexts/AuthContext'
 
 // ============================================
 // Componente de status de pagamento
@@ -103,7 +104,9 @@ export default function CheckoutPage() {
   const [paymentStatus, setPaymentStatus] = useState<'approved' | 'pending' | 'rejected' | 'cancelled' | null>(null)
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'pix' | 'boleto'>('pix')
   const [loading, setLoading] = useState(false)
-  const [step, setStep] = useState<'select' | 'payment' | 'processing'>('select')
+  const [step, setStep] = useState<'select' | 'payment'>('select')
+  const { user } = useAuth()
+  const { createPreference, getCheckoutUrl, error: mpError } = useMercadoPago()
 
   // Lê parâmetros da URL (retorno do MP)
   useEffect(() => {
@@ -130,18 +133,27 @@ export default function CheckoutPage() {
 
   const formatCurrency = (v: number) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 
-  const handlePay = () => {
+  const handlePay = async () => {
     if (!selectedItem) return
+
+    // Exigir login para associar o pagamento a um usuário
+    if (!user) {
+      navigate('/entrar')
+      return
+    }
+
     setLoading(true)
 
-    // Em produção: chamar backend para criar preferência e redirecionar para MP
-    // Por ora, simula o redirecionamento
-    setTimeout(() => {
-      // Redireciona para o Mercado Pago (em produção use a URL real da preferência)
-      // window.location.href = preference.sandbox_init_point
+    const pref = await createPreference(selectedItem, user.email, user.id)
+
+    if (pref) {
+      const url = getCheckoutUrl(pref)
+      // Log para ajudar a depurar em produção
+      console.log('Redirecionando para Mercado Pago:', url)
+      window.location.href = url
+    } else {
       setLoading(false)
-      setStep('processing')
-    }, 2000)
+    }
   }
 
   const getItemIcon = (item: PlanItem) => {
@@ -172,7 +184,7 @@ export default function CheckoutPage() {
         top: 0,
         zIndex: 100
       }}>
-        <img src="http://www.kryska.com.br/kryskalogo.png" alt="Kryska" style={{ height: 36 }} />
+        <img src="/kryskalogo.png" alt="Kryska" style={{ height: 36 }} />
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#16a34a', fontSize: 13, fontWeight: 600 }}>
           <Lock size={14} />
           Pagamento 100% seguro
@@ -625,6 +637,20 @@ export default function CheckoutPage() {
                     )}
                   </button>
 
+                  {mpError && (
+                    <div style={{
+                      marginTop: 12,
+                      padding: '10px 12px',
+                      borderRadius: 8,
+                      background: '#fef2f2',
+                      border: '1px solid #fecaca',
+                      fontSize: 12,
+                      color: '#b91c1c'
+                    }}>
+                      {mpError}
+                    </div>
+                  )}
+
                   {/* Métodos aceitos */}
                   <div style={{ marginTop: 20, textAlign: 'center' }}>
                     <div style={{ fontSize: 11, color: '#9ca3af', marginBottom: 10 }}>Formas de pagamento aceitas</div>
@@ -656,27 +682,6 @@ export default function CheckoutPage() {
                 </div>
               </div>
             </div>
-          </div>
-        )}
-
-        {/* Step: Processando */}
-        {step === 'processing' && (
-          <div style={{ textAlign: 'center', padding: '80px 20px' }}>
-            <div style={{
-              width: 80, height: 80, borderRadius: '50%',
-              background: 'linear-gradient(135deg, #f43f5e, #e11d48)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              margin: '0 auto 24px',
-              boxShadow: '0 8px 30px rgba(244,63,94,0.3)'
-            }}>
-              <div className="spin" style={{ width: 32, height: 32, border: '3px solid rgba(255,255,255,0.3)', borderTop: '3px solid #fff', borderRadius: '50%' }} />
-            </div>
-            <h2 style={{ fontSize: 24, fontWeight: 700, color: '#1f2937', marginBottom: 12 }}>
-              Redirecionando para o Mercado Pago...
-            </h2>
-            <p style={{ color: '#9ca3af', fontSize: 14 }}>
-              Aguarde, você será redirecionado em instantes para concluir o pagamento com segurança.
-            </p>
           </div>
         )}
 

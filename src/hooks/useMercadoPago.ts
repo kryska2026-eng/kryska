@@ -86,34 +86,37 @@ export function useMercadoPago() {
   const publicKey = import.meta.env.VITE_MP_PUBLIC_KEY || 'TEST-public-key'
   const isSandbox = import.meta.env.VITE_MP_SANDBOX === 'true'
 
-  // Cria preferência de pagamento (deve ser feito no backend em produção)
-  // Aqui simulamos a estrutura para o frontend
-  const createPreference = async (_item: PlanItem, _userEmail: string, _userId: string): Promise<MPPreference | null> => {
+  // Cria preferência de pagamento chamando o backend
+  const createPreference = async (item: PlanItem, userEmail: string, userId: string | number): Promise<MPPreference | null> => {
     setLoading(true)
     setError(null)
 
     try {
-      // Em produção, isso seria uma chamada ao seu backend:
-      // const res = await fetch('/api/mp/create-preference', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ item, userEmail, userId })
-      // })
-      // const data = await res.json()
-      // setPreference(data)
-      // return data
+      const res = await fetch('/api/mercadopago/create-preference', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ item, userEmail, userId })
+      })
 
-      // Simulação para desenvolvimento
-      const mockPreference: MPPreference = {
-        id: `pref_${Date.now()}`,
-        init_point: `https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=pref_${Date.now()}`,
-        sandbox_init_point: `https://sandbox.mercadopago.com.br/checkout/v1/redirect?pref_id=pref_${Date.now()}`
+      if (!res.ok) {
+        const data = await res.json().catch(() => null)
+        const message = data?.error || 'Erro ao criar preferência'
+        throw new Error(message)
       }
 
-      setPreference(mockPreference)
-      return mockPreference
+      const data = await res.json()
+
+      const pref: MPPreference = {
+        id: data.id,
+        init_point: data.init_point,
+        sandbox_init_point: data.sandbox_init_point
+      }
+
+      setPreference(pref)
+      return pref
     } catch (err) {
-      setError('Erro ao criar preferência de pagamento')
+      console.error('Erro ao criar preferência de pagamento', err)
+      setError(err instanceof Error ? err.message : 'Erro ao criar preferência de pagamento')
       return null
     } finally {
       setLoading(false)
