@@ -102,7 +102,7 @@ export default function ProfilePage() {
 
       {/* Conteúdo principal encaixotado */}
       <div className="profile-content-inner" style={{ paddingTop: 28, paddingBottom: 40 }}>
-        <div className="profile-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: 28, alignItems: 'start' }}>
+        <div className="profile-grid" style={{ display: 'grid', gap: 28, alignItems: 'start', minWidth: 0 }}>
 
           {/* COLUNA ESQUERDA */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>

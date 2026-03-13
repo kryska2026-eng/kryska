@@ -71,10 +71,11 @@ function PaymentStatus({ status }: { status: 'approved' | 'pending' | 'rejected'
         background: c.bg,
         border: `1px solid ${c.border}`,
         borderRadius: 24,
-        padding: '64px 48px',
+        padding: 'clamp(32px, 8vw, 64px) clamp(24px, 5vw, 48px)',
         maxWidth: 480,
         width: '100%',
-        textAlign: 'center'
+        textAlign: 'center',
+        boxSizing: 'border-box'
       }}>
         <div style={{ color: c.color, marginBottom: 24 }}>{c.icon}</div>
         <h1 style={{ fontSize: 28, fontWeight: 700, color: '#1f2937', marginBottom: 8 }}>{c.title}</h1>
@@ -173,20 +174,20 @@ export default function CheckoutPage() {
     <div style={{ minHeight: '100vh', background: '#fafafa' }}>
 
       {/* Navbar simples */}
-      <nav style={{
+      <nav className="checkout-nav" style={{
         background: '#fff',
         borderBottom: '1px solid #f1f5f9',
-        padding: '0 50px',
         height: 64,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         position: 'sticky',
         top: 0,
-        zIndex: 100
+        zIndex: 100,
+        boxSizing: 'border-box'
       }}>
-        <img src={logoKryska} alt="Kryska" style={{ height: 36 }} />
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#16a34a', fontSize: 13, fontWeight: 600 }}>
+        <img src={logoKryska} alt="Kryska" style={{ height: 36, width: 'auto' }} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: '#16a34a', fontSize: 12, fontWeight: 600, flexShrink: 0 }}>
           <Lock size={14} />
           Pagamento 100% seguro
         </div>
@@ -223,7 +224,7 @@ export default function CheckoutPage() {
               <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1f2937', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 8 }}>
                 <Shield size={18} style={{ color: '#f43f5e' }} /> Planos Mensais
               </h2>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }}>
+              <div className="checkout-plans-grid">
                 {PLANS.map(plan => (
                   <div
                     key={plan.id}
@@ -292,7 +293,7 @@ export default function CheckoutPage() {
                   }}>
                     <TrendingUp size={12} /> {group.label}
                   </div>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
+                  <div className="checkout-boost-grid">
                     {group.packs.map(pack => {
                       const days = pack.id.includes('_1d') ? '1 dia' : pack.id.includes('_3d') ? '3 dias' : pack.id.includes('_7d') ? '7 dias' : '15 dias'
                       const isBest = pack.id.includes('_7d')
@@ -345,7 +346,7 @@ export default function CheckoutPage() {
               <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1f2937', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 8 }}>
                 <Zap size={18} style={{ color: '#8b5cf6' }} /> Complemento Multimídia
               </h2>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+              <div className="checkout-media-grid">
                 {MEDIA_PACKS.map(pack => {
                   const days = pack.id.includes('7d') ? 7 : pack.id.includes('15d') ? 15 : 30
                   return (
@@ -384,7 +385,7 @@ export default function CheckoutPage() {
 
         {/* Step: Pagamento */}
         {step === 'payment' && selectedItem && (
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: 32, alignItems: 'start' }}>
+          <div className="checkout-payment-grid">
 
             {/* Coluna esquerda — métodos */}
             <div>

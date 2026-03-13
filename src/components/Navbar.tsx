@@ -30,8 +30,8 @@ export default function Navbar() {
     <header style={{ background: '#fff', position: 'sticky', top: 0, zIndex: 50, boxShadow: '0 1px 3px rgba(0,0,0,0.06)', borderBottom: '1px solid #f1f5f9' }}>
 
       {/* Barra topo adulto */}
-      <div style={{ background: '#e11d48', color: '#fff', fontSize: 12, padding: '6px 0', textAlign: 'center', fontWeight: 500, letterSpacing: '0.03em' }}>
-        🔞 Conteúdo adulto exclusivo para maiores de 18 anos &nbsp;·&nbsp; Ribeirão Preto e região
+      <div className="navbar-top-bar" style={{ background: '#e11d48', color: '#fff', textAlign: 'center', fontWeight: 500, letterSpacing: '0.03em' }}>
+        🔞 Conteúdo adulto exclusivo para maiores de 18 anos · Ribeirão Preto e região
       </div>
 
       {/* Linha 1: Logo + ações */}

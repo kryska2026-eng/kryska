@@ -247,8 +247,8 @@ export default function HomePage() {
 
         {/* ── Destaques VIP ── */}
         {featured.length > 0 && (
-          <section style={{ marginBottom: 72 }}>
-            <div className="flex items-center justify-between" style={{ marginBottom: 32 }}>
+          <section className="home-section-spacing">
+            <div className="flex items-center justify-between home-section-header" style={{ marginBottom: 32 }}>
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center shadow-sm">
                   <Crown className="w-4 h-4 text-white" />
@@ -283,21 +283,21 @@ export default function HomePage() {
         )}
 
         {/* Separador elegante */}
-        <div className="flex items-center gap-4" style={{ marginBottom: 48 }}>
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
-          <div className="flex items-center gap-2 px-4 py-1.5 bg-white border border-gray-200 rounded-full shadow-sm">
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 py-4" style={{ marginBottom: 48 }}>
+          <div className="flex-1 min-w-[60px] h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent hidden sm:block" />
+          <div className="flex items-center gap-2 px-4 py-1.5 bg-white border border-gray-200 rounded-full shadow-sm shrink-0">
             <Sparkles className="w-3 h-3 text-rose-400" />
             <span className="text-gray-500 text-xs font-medium uppercase tracking-widest">Todas as acompanhantes</span>
           </div>
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+          <div className="flex-1 min-w-[60px] h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent hidden sm:block" />
         </div>
 
         {/* ── Grid principal + Sidebar ── */}
-        <div className="flex gap-8 items-start">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
 
           {/* Cards — área principal */}
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center justify-between" style={{ marginBottom: 32 }}>
+          <div className="flex-1 min-w-0 w-full">
+            <div className="flex items-center justify-between home-section-header" style={{ marginBottom: 32 }}>
               <div className="flex items-center gap-2">
                 <div className="w-7 h-7 bg-rose-500 rounded-lg flex items-center justify-center">
                   <Star className="w-3.5 h-3.5 text-white" />
@@ -426,7 +426,7 @@ export default function HomePage() {
         </div>
 
         {/* ── Cidades (SEO) ── */}
-        <section style={{ marginTop: 80 }} className="bg-white border border-gray-100 rounded-2xl p-10 shadow-sm text-center">
+        <section className="home-cities-section bg-white border border-gray-100 rounded-2xl shadow-sm text-center">
           <h2 className="text-sm font-bold text-gray-900 mb-8 flex items-center justify-center gap-2">
             <MapPin className="w-4 h-4 text-rose-500" /> Acompanhantes por cidade
           </h2>

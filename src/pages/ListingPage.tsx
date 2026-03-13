@@ -115,7 +115,8 @@ export default function ListingPage() {
                   style={{
                     paddingLeft: 36, paddingRight: 16, paddingTop: 9, paddingBottom: 9,
                     border: '1px solid #e5e7eb', borderRadius: 12, fontSize: 13,
-                    color: '#374151', background: '#fff', outline: 'none', width: 220,
+                    color: '#374151', background: '#fff', outline: 'none',
+                    width: '100%', minWidth: 0, maxWidth: 220,
                   }}
                 />
               </div>
@@ -167,8 +168,8 @@ export default function ListingPage() {
       <div className="listing-content-inner" style={{ paddingTop: 40, paddingBottom: 40 }}>
         <div style={{ display: 'flex', gap: 32, alignItems: 'flex-start' }}>
 
-          {/* Sidebar */}
-          <aside style={{ width: 220, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 16 }} className="hidden lg:flex">
+          {/* Sidebar — só a partir de 1024px; no mobile usa o botão Filtros */}
+          <aside className="listing-sidebar">
 
             {/* VIP Banner */}
             <div style={{

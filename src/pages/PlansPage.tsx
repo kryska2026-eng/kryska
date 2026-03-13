@@ -87,10 +87,9 @@ export default function PlansPage() {
     <div style={{ minHeight: '100vh', backgroundColor: '#fafafa' }}>
 
       {/* ── Header ─────────────────────────────────────────── */}
-      <div style={{
+      <div className="plans-hero" style={{
         background: 'linear-gradient(135deg, #fff1f2 0%, #fff5f7 50%, #fce7f3 100%)',
         borderBottom: '1px solid #fecdd3',
-        padding: '60px 50px 50px',
         textAlign: 'center',
       }}>
         <div style={{
@@ -102,10 +101,10 @@ export default function PlansPage() {
           <Zap style={{ width: 13, height: 13 }} />
           Planos e Pacotes de Visibilidade
         </div>
-        <h1 style={{ fontSize: 36, fontWeight: 900, color: '#1a0a10', marginBottom: 12, lineHeight: 1.2 }}>
+        <h1 style={{ fontSize: 'clamp(1.5rem, 5vw, 2.25rem)', fontWeight: 900, color: '#1a0a10', marginBottom: 12, lineHeight: 1.2 }}>
           Apareça mais. Receba mais.
         </h1>
-        <p style={{ color: '#6b7280', fontSize: 16, maxWidth: 480, margin: '0 auto' }}>
+        <p style={{ color: '#6b7280', fontSize: 'clamp(14px, 2vw, 16px)', maxWidth: 480, margin: '0 auto' }}>
           Escolha seu plano mensal e turbine sua visibilidade com pacotes de subida ao topo da listagem.
         </p>
       </div>
@@ -132,7 +131,7 @@ export default function PlansPage() {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, maxWidth: 680, margin: '0 auto' }}>
+          <div className="plans-monthly-grid">
 
             {/* Plano Básico */}
             <div style={{
@@ -259,7 +258,7 @@ export default function PlansPage() {
         {/* ── COMO FUNCIONA A SUBIDA ─────────────────────── */}
         <div style={{
           background: '#fff', borderRadius: 20, border: '1px solid #f1f5f9',
-          padding: '40px', marginBottom: 80,
+          padding: 'clamp(20px, 5vw, 40px)', marginBottom: 80,
           boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
         }}>
           <div style={{ textAlign: 'center', marginBottom: 36 }}>
@@ -280,7 +279,7 @@ export default function PlansPage() {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+          <div className="plans-how-grid">
             {[
               { icon: <TrendingUp style={{ width: 22, height: 22, color: '#e11d48' }} />, title: 'Topo garantido', desc: 'Seu perfil aparece antes de todos durante 1 hora' },
               { icon: <Users style={{ width: 22, height: 22, color: '#e11d48' }} />, title: 'Visibilidade global', desc: 'Aparece no topo para todas as cidades da plataforma' },
@@ -351,15 +350,10 @@ export default function PlansPage() {
                 </div>
 
                 {/* Cards dos pacotes */}
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(4, 1fr)',
-                  gap: 0,
-                }}>
+                <div className="plans-boost-inner">
                   {group.packages.map((pkg, i) => (
-                    <div key={i} style={{
-                      padding: '24px 20px',
-                      borderRight: i < 3 ? '1px solid #f1f5f9' : 'none',
+                    <div key={i} className="plans-boost-card" style={{
+                      padding: '24px 16px',
                       position: 'relative',
                       textAlign: 'center',
                       background: pkg.bestSeller ? `${group.colorLight}80` : '#fff',
@@ -417,7 +411,7 @@ export default function PlansPage() {
         {/* ── COMPLEMENTO MULTIMÍDIA ─────────────────────── */}
         <div style={{
           background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)',
-          borderRadius: 24, padding: '44px 44px',
+          borderRadius: 24,
           marginBottom: 80, position: 'relative', overflow: 'hidden',
         }}>
           {/* Decoração */}
@@ -432,8 +426,8 @@ export default function PlansPage() {
             background: 'rgba(99,102,241,0.15)',
           }} />
 
-          <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: 40 }}>
-            <div style={{ flex: 1 }}>
+          <div className="plans-multimidia-flex" style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center' }}>
+            <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 background: 'rgba(139,92,246,0.3)', border: '1px solid rgba(139,92,246,0.4)',
@@ -530,12 +524,12 @@ export default function PlansPage() {
           overflow: 'hidden', marginBottom: 80,
           boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
         }}>
-          <div style={{ padding: '28px 32px', borderBottom: '1px solid #f1f5f9' }}>
-            <h2 style={{ fontSize: 20, fontWeight: 800, color: '#1a0a10' }}>
+          <div style={{ padding: '20px 16px', borderBottom: '1px solid #f1f5f9' }}>
+            <h2 style={{ fontSize: 18, fontWeight: 800, color: '#1a0a10', margin: 0 }}>
               Comparativo de planos
             </h2>
           </div>
-          <div style={{ overflowX: 'auto' }}>
+          <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
               <thead>
                 <tr style={{ background: '#fafafa' }}>

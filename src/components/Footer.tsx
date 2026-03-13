@@ -18,11 +18,12 @@ export default function Footer() {
           </div>
           <Link
             to="/anunciar"
+            className="footer-cta-link"
             style={{
-              display: 'inline-flex', alignItems: 'center', gap: 8,
+              display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
               padding: '10px 24px', background: '#fff', color: '#e11d48',
               fontWeight: 700, borderRadius: 12, fontSize: 14,
-              textDecoration: 'none', whiteSpace: 'nowrap',
+              textDecoration: 'none',
               boxShadow: '0 2px 8px rgba(0,0,0,0.15)', flexShrink: 0
             }}
           >
