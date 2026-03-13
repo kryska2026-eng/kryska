@@ -1,3 +1,4 @@
+import logoKryska from '../assets/kryskalogo.png';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, LogIn, UserPlus, MapPin, ChevronDown, Home, Users, CreditCard, Info } from 'lucide-react';
@@ -39,11 +40,7 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link to="/" style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
-            <img
-              src="https://www.kryska.com.br/kryskalogo.png"
-              alt="Kryska"
-              style={{ height: 40, width: 'auto', objectFit: 'contain' }}
-            />
+            <img src={logoKryska} alt="Kryska" style={{ height: 36 }} />
           </Link>
 
           <div style={{ flex: 1 }} />
