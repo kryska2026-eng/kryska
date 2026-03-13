@@ -34,6 +34,8 @@ import AdminHome from './pages/admin/AdminHome';
 import AdminUsers from './pages/admin/AdminUsers';
 import AdminVerifications from './pages/admin/AdminVerifications';
 import AdminPayments from './pages/admin/AdminPayments';
+import AdminPlans from './pages/admin/AdminPlans';
+import AdminSettings from './pages/admin/AdminSettings';
 
 const AGE_GATE_KEY = 'kryska_age_confirmed';
 
@@ -89,6 +91,8 @@ function AppLayout() {
             <Route path="/admin/users" element={<ProtectedRoute type="admin"><AdminUsers /></ProtectedRoute>} />
             <Route path="/admin/verifications" element={<ProtectedRoute type="admin"><AdminVerifications /></ProtectedRoute>} />
             <Route path="/admin/payments" element={<ProtectedRoute type="admin"><AdminPayments /></ProtectedRoute>} />
+            <Route path="/admin/plans" element={<ProtectedRoute type="admin"><AdminPlans /></ProtectedRoute>} />
+            <Route path="/admin/settings" element={<ProtectedRoute type="admin"><AdminSettings /></ProtectedRoute>} />
 
             {/* 404 */}
             <Route path="*" element={<NotFoundPage />} />

@@ -1,4 +1,4 @@
-import { Users, CreditCard, Eye, Clock, CheckCircle, AlertCircle } from 'lucide-react';
+import { Users, CreditCard, Eye, Clock, CheckCircle, AlertCircle, Package } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AdminLayout from './AdminLayout';
 
@@ -83,7 +83,7 @@ export default function AdminHome() {
             border: '1px solid #f1f5f9', boxShadow: '0 2px 8px rgba(0,0,0,0.04)'
           }}>
             <h3 style={{ margin: '0 0 16px', fontSize: 16, fontWeight: 700, color: '#1e293b' }}>Ações rápidas</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: 10 }}>
               <Link to="/admin/verifications" style={{
                 display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
                 padding: '16px 10px', borderRadius: 14,
@@ -119,6 +119,18 @@ export default function AdminHome() {
                   R$ 8.420
                 </span>
                 <span style={{ fontSize: 11, color: '#14532d', textAlign: 'center' }}>Pagamentos</span>
+              </Link>
+              <Link to="/admin/plans" style={{
+                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
+                padding: '16px 10px', borderRadius: 14,
+                backgroundColor: '#fce7f3', border: '1px solid #fbcfe8',
+                textDecoration: 'none', cursor: 'pointer'
+              }}>
+                <Package size={22} color="#be185d" />
+                <span style={{ fontSize: 12, fontWeight: 700, color: '#be185d', textAlign: 'center' }}>
+                  Planos
+                </span>
+                <span style={{ fontSize: 11, color: '#9d174d', textAlign: 'center' }}>Preços</span>
               </Link>
             </div>
           </div>

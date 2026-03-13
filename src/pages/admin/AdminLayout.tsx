@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard, Users, CheckSquare, CreditCard,
-  Settings, LogOut, Menu, X, ChevronRight, Shield
+  Package, Settings, LogOut, Menu, X, ChevronRight, Shield
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -11,6 +11,7 @@ const menuItems = [
   { icon: Users, label: 'Anunciantes', path: '/admin/users' },
   { icon: CheckSquare, label: 'Verificações', path: '/admin/verifications' },
   { icon: CreditCard, label: 'Pagamentos', path: '/admin/payments' },
+  { icon: Package, label: 'Planos', path: '/admin/plans' },
   { icon: Settings, label: 'Configurações', path: '/admin/settings' },
 ];
 
