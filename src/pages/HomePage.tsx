@@ -128,7 +128,7 @@ export default function HomePage() {
           </h1>
 
           <p
-            className="hero-desc mb-8 leading-relaxed max-w-md mx-auto text-gray-500"
+            className="hero-desc mb-6 leading-relaxed max-w-md mx-auto text-gray-500"
             style={{ fontSize: '1.05rem' }}
           >
             Perfis verificados, fotos reais e contato direto com as melhores
@@ -136,7 +136,7 @@ export default function HomePage() {
           </p>
 
           {/* Search form */}
-          <div className="flex justify-center mb-8">
+          <div className="flex justify-center mb-6">
             <form
               onSubmit={handleSearch}
               style={{ width: '100%', maxWidth: 420 }}
@@ -196,22 +196,6 @@ export default function HomePage() {
             </form>
           </div>
 
-          {/* Quick chips — cidades populares */}
-          <div className="flex city-chips justify-center gap-2 mb-2">
-            {CITIES.slice(0, 8).map((city) => (
-              <Link
-                key={city}
-                to={`/acompanhantes?city=${city}`}
-                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all hover:scale-105 text-gray-500 hover:text-rose-600 bg-white hover:bg-rose-50"
-                style={{
-                  border: '1px solid rgba(244,63,94,0.15)',
-                  boxShadow: '0 1px 4px rgba(0,0,0,0.05)',
-                }}
-              >
-                <MapPin className="w-2.5 h-2.5" /> {city}
-              </Link>
-            ))}
-          </div>
         </div>
 
 
