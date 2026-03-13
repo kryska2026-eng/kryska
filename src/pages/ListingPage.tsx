@@ -423,23 +423,22 @@ export default function ListingPage() {
             )}
 
             {/* Grid box */}
-            <div style={{
+            <div className="listing-grid-box" style={{
               background: '#fff', borderRadius: 20,
               border: '1px solid #f1f5f9',
               boxShadow: '0 2px 16px rgba(0,0,0,0.04)',
-              padding: 24,
             }}>
               {/* Grid header */}
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <div style={{ width: 4, height: 20, background: 'linear-gradient(180deg, #f43f5e, #fb7185)', borderRadius: 4 }} />
-                  <h2 style={{ fontSize: 16, fontWeight: 700, color: '#111827', margin: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 10 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0, flex: '1 1 auto' }}>
+                  <div style={{ width: 4, height: 20, background: 'linear-gradient(180deg, #f43f5e, #fb7185)', borderRadius: 4, flexShrink: 0 }} />
+                  <h2 style={{ fontSize: 'clamp(0.875rem, 2.5vw, 1rem)', fontWeight: 700, color: '#111827', margin: 0 }}>
                     {filters.city ? `Acompanhantes em ${filters.city}` : 'Todas as acompanhantes'}
                   </h2>
-                  <span style={{ fontSize: 12, color: '#9ca3af', fontWeight: 400 }}>({filtered.length})</span>
+                  <span style={{ fontSize: 12, color: '#9ca3af', fontWeight: 400, flexShrink: 0 }}>({filtered.length})</span>
                 </div>
                 {!filters.city && !search && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '5px 12px', background: '#fff7ed', border: '1px solid #fed7aa', borderRadius: 20 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '5px 12px', background: '#fff7ed', border: '1px solid #fed7aa', borderRadius: 20, flexShrink: 0 }}>
                     <Crown style={{ width: 13, height: 13, color: '#f97316' }} />
                     <span style={{ fontSize: 11, fontWeight: 600, color: '#ea580c' }}>Destaque aparece primeiro</span>
                   </div>

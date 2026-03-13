@@ -375,6 +375,75 @@ a, button { transition: all 0.15s ease; }
   }
 }
 
+/* Profile: header do card (nome, badges, visitas) — wrap no mobile */
+.profile-header-inner {
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+}
+.profile-header-visitas {
+  width: 100%;
+  flex-basis: 100%;
+  order: 1;
+}
+@media (min-width: 480px) {
+  .profile-header-visitas {
+    width: auto;
+    flex-basis: auto;
+    order: 0;
+  }
+}
+
+/* Profile: grid de vídeos — 1 col mobile, 2 col desktop */
+.profile-videos-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 12px !important;
+}
+@media (min-width: 560px) {
+  .profile-videos-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Profile: padding dos cards — menor no mobile */
+.profile-section-card {
+  padding-left: 14px !important;
+  padding-right: 14px !important;
+}
+@media (min-width: 640px) {
+  .profile-section-card {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+@media (min-width: 1024px) {
+  .profile-section-card {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+}
+
+/* Cards de perfil na listagem: não estourar o grid */
+.profile-card-wrap {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Listing: padding do box do grid — menor no mobile */
+.listing-grid-box {
+  padding: 12px !important;
+}
+@media (min-width: 640px) {
+  .listing-grid-box {
+    padding: 20px !important;
+  }
+}
+@media (min-width: 1024px) {
+  .listing-grid-box {
+    padding: 24px !important;
+  }
+}
+
 /* Stats bar: scroll horizontal no mobile */
 .stats-bar {
   overflow-x: auto;

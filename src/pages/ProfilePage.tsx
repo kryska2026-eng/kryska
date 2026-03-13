@@ -111,12 +111,12 @@ export default function ProfilePage() {
             <div style={{ background: '#fff', borderRadius: 20, overflow: 'hidden', border: '1px solid #f1f5f9', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
 
               {/* Header nome */}
-              <div style={{ padding: '20px 24px', borderBottom: '1px solid #f9fafb' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-                      <h1 style={{ fontSize: 26, fontWeight: 900, color: '#111827', margin: 0 }}>{user.name}</h1>
-                      <span style={{ fontSize: 18, color: '#9ca3af', fontWeight: 300 }}>{user.age} anos</span>
+              <div className="profile-section-card" style={{ paddingTop: 16, paddingBottom: 16, borderBottom: '1px solid #f9fafb' }}>
+                <div className="profile-header-inner" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
+                  <div style={{ minWidth: 0, flex: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                      <h1 style={{ fontSize: 'clamp(1.25rem, 4vw, 1.625rem)', fontWeight: 900, color: '#111827', margin: 0 }}>{user.name}</h1>
+                      <span style={{ fontSize: 16, color: '#9ca3af', fontWeight: 300 }}>{user.age} anos</span>
                       {user.isVerified && (
                         <span style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '3px 10px', background: '#f0fdf4', border: '1px solid #bbf7d0', color: '#16a34a', fontSize: 11, fontWeight: 700, borderRadius: 20 }}>
                           <BadgeCheck size={12} /> Verificada
@@ -128,12 +128,12 @@ export default function ProfilePage() {
                         </span>
                       )}
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 6 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 6, flexWrap: 'wrap' }}>
                       <MapPin size={13} color="#f43f5e" />
                       <span style={{ color: '#6b7280', fontSize: 13 }}>{user.neighborhood}, {user.city}</span>
                     </div>
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: '#9ca3af', fontSize: 12 }}>
+                  <div className="profile-header-visitas" style={{ display: 'flex', alignItems: 'center', gap: 4, color: '#9ca3af', fontSize: 12, flexShrink: 0 }}>
                     <Eye size={13} />
                     <span>{user.views.toLocaleString('pt-BR')} visitas</span>
                   </div>
@@ -194,12 +194,12 @@ export default function ProfilePage() {
             {/* Vídeos */}
             {user.videos && user.videos.length > 0 && (
               <div style={{ background: '#fff', borderRadius: 20, overflow: 'hidden', border: '1px solid #f1f5f9', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
-                <div style={{ padding: '16px 24px', borderBottom: '1px solid #f9fafb', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <div className="profile-section-card" style={{ padding: '16px 24px', borderBottom: '1px solid #f9fafb', display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
                   <Play size={15} color="#f43f5e" fill="#f43f5e" />
                   <h3 style={{ fontWeight: 800, color: '#111827', margin: 0, fontSize: 15 }}>Vídeos</h3>
                   <span style={{ padding: '2px 8px', background: '#ffe4e6', color: '#f43f5e', fontSize: 11, fontWeight: 700, borderRadius: 20 }}>{user.videos.length}</span>
                 </div>
-                <div style={{ padding: 16, display: 'grid', gridTemplateColumns: user.videos.length === 1 ? '1fr' : '1fr 1fr', gap: 12 }}>
+                <div className="profile-videos-grid" style={{ padding: 16 }}>
                   {user.videos.map((video, i) => (
                     <button
                       key={video.id}
@@ -228,20 +228,20 @@ export default function ProfilePage() {
 
             {/* Sobre mim */}
             <div style={{ background: '#fff', borderRadius: 20, border: '1px solid #f1f5f9', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', overflow: 'hidden' }}>
-              <div style={{ padding: '16px 24px', borderBottom: '1px solid #f9fafb' }}>
+              <div className="profile-section-card" style={{ padding: '16px 24px', borderBottom: '1px solid #f9fafb' }}>
                 <h3 style={{ fontWeight: 800, color: '#111827', margin: 0, fontSize: 15 }}>Sobre mim</h3>
               </div>
-              <div style={{ padding: '20px 24px' }}>
+              <div className="profile-section-card" style={{ padding: '20px 24px' }}>
                 <p style={{ color: '#4b5563', lineHeight: 1.8, fontSize: 14, margin: 0 }}>{user.description}</p>
               </div>
             </div>
 
             {/* Serviços */}
             <div style={{ background: '#fff', borderRadius: 20, border: '1px solid #f1f5f9', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', overflow: 'hidden' }}>
-              <div style={{ padding: '16px 24px', borderBottom: '1px solid #f9fafb' }}>
+              <div className="profile-section-card" style={{ padding: '16px 24px', borderBottom: '1px solid #f9fafb' }}>
                 <h3 style={{ fontWeight: 800, color: '#111827', margin: 0, fontSize: 15 }}>Serviços</h3>
               </div>
-              <div style={{ padding: '16px 24px', display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              <div className="profile-section-card" style={{ padding: '16px 24px', display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                 {user.services.map((s) => (
                   <span key={s} style={{ padding: '6px 14px', background: '#fff1f2', border: '1px solid #fecdd3', color: '#be123c', fontSize: 13, borderRadius: 20, fontWeight: 600 }}>
                     {s}
@@ -252,10 +252,10 @@ export default function ProfilePage() {
 
             {/* Características */}
             <div style={{ background: '#fff', borderRadius: 20, border: '1px solid #f1f5f9', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', overflow: 'hidden' }}>
-              <div style={{ padding: '16px 24px', borderBottom: '1px solid #f9fafb' }}>
+              <div className="profile-section-card" style={{ padding: '16px 24px', borderBottom: '1px solid #f9fafb' }}>
                 <h3 style={{ fontWeight: 800, color: '#111827', margin: 0, fontSize: 15 }}>Características</h3>
               </div>
-              <div className="chars-grid" style={{ padding: 16, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
+              <div className="chars-grid profile-section-card" style={{ padding: 16, display: 'grid', gap: 10 }}>
                 {[
                   { icon: <User size={15} color="#f43f5e" />, label: 'Idade', value: `${user.age} anos` },
                   { icon: <Ruler size={15} color="#f43f5e" />, label: 'Altura', value: user.height },
@@ -284,10 +284,10 @@ export default function ProfilePage() {
           <div className="profile-sidebar" style={{ position: 'sticky', top: 24, display: 'flex', flexDirection: 'column', gap: 16 }}>
 
             {/* Card de contato */}
-            <div style={{ background: '#fff', borderRadius: 20, overflow: 'hidden', border: '1px solid #f1f5f9', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
+            <div style={{ background: '#fff', borderRadius: 20, overflow: 'hidden', border: '1px solid #f1f5f9', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', minWidth: 0 }}>
 
               {/* Header do card */}
-              <div style={{ padding: '20px 22px', background: 'linear-gradient(135deg, #fff1f2, #ffe4e6)', borderBottom: '1px solid #fecdd3' }}>
+              <div className="profile-section-card" style={{ padding: '20px 22px', background: 'linear-gradient(135deg, #fff1f2, #ffe4e6)', borderBottom: '1px solid #fecdd3' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                   <div style={{ width: 48, height: 48, borderRadius: '50%', overflow: 'hidden', border: '2px solid #f43f5e', flexShrink: 0 }}>
                     <img src={user.photos[0]?.url} alt={user.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -313,7 +313,7 @@ export default function ProfilePage() {
               </div>
 
               {/* Botões */}
-              <div style={{ padding: '18px 18px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div className="profile-section-card" style={{ padding: '18px 18px', display: 'flex', flexDirection: 'column', gap: 10 }}>
 
                 {/* BOTÃO WHATSAPP — super chamativo */}
                 <a

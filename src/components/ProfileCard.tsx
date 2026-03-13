@@ -38,7 +38,7 @@ export default function ProfileCard({ user }: Props) {
 
   return (
     <div
-      className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+      className="profile-card-wrap group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow border border-gray-100"
       style={{ outline: user.plan === 'featured' ? '2px solid #fbbf24' : 'none' }}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
