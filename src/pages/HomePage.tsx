@@ -202,29 +202,6 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════════
-          STATS BAR
-      ══════════════════════════════════════════════ */}
-      <div className="bg-white border-b border-gray-100 shadow-sm">
-        <div className="max-w-5xl mx-auto page-container" style={{ paddingTop: 20, paddingBottom: 20 }}>
-          <div className="flex items-center stats-bar gap-6 sm:gap-10 text-sm">
-            {[
-              { icon: <Flame className="w-4 h-4 text-rose-500" />, val: '200+', label: 'perfis ativos' },
-              { icon: <BadgeCheck className="w-4 h-4 text-emerald-500" />, val: '80%', label: 'verificadas' },
-              { icon: <MapPin className="w-4 h-4 text-blue-400" />, val: '20', label: 'cidades' },
-              { icon: <TrendingUp className="w-4 h-4 text-violet-500" />, val: '50k+', label: 'acessos/mês' },
-              { icon: <Play className="w-4 h-4 text-amber-500" />, val: '60+', label: 'com vídeo' },
-            ].map((s) => (
-              <div key={s.label} className="flex items-center gap-1.5 text-gray-500">
-                {s.icon}
-                <strong className="text-gray-800 font-bold">{s.val}</strong>
-                <span className="hidden sm:inline text-gray-400">{s.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ══════════════════════════════════════════════
           CONTEÚDO PRINCIPAL — com espaço lateral
       ══════════════════════════════════════════════ */}
       <div className="max-w-5xl mx-auto page-container" style={{ paddingTop: 'clamp(32px, 5vw, 72px)', paddingBottom: 'clamp(32px, 5vw, 72px)' }}>
