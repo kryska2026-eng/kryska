@@ -214,62 +214,196 @@ export default function CheckoutPage() {
               ? 'Selecione um plano ou pacote para continuar'
               : 'Escolha a forma de pagamento e confirme seu pedido'}
           </p>
+          {/* Alerta de desconto de lançamento */}
+          {step === 'select' && (
+            <div style={{
+              marginTop: 12,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              padding: '6px 12px',
+              borderRadius: 999,
+              background: '#fef9c3',
+              border: '1px solid #facc15',
+              fontSize: 12,
+              color: '#854d0e',
+              fontWeight: 600,
+            }}>
+              <Clock size={14} />
+              Todos os planos estão com <span style={{ fontWeight: 800 }}>50% de desconto</span> no mês de lançamento.
+            </div>
+          )}
         </div>
 
         {/* Step: Selecionar item */}
         {step === 'select' && (
           <div>
-            {/* Planos mensais */}
+            {/* Planos Básico e VIP */}
             <div style={{ marginBottom: 40 }}>
               <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1f2937', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 8 }}>
-                <Shield size={18} style={{ color: '#f43f5e' }} /> Planos Mensais
+                <Shield size={18} style={{ color: '#f43f5e' }} /> Planos Básico e VIP
               </h2>
+              {/* Básico */}
+              <h3 style={{ fontSize: 14, fontWeight: 700, color: '#4b5563', marginBottom: 10 }}>Básico</h3>
+              <div className="checkout-plans-grid" style={{ marginBottom: 24 }}>
+                {PLANS.filter(p => p.id.startsWith('basic')).map(plan => {
+                  const original = plan.amount * 2
+                  const periodLabel =
+                    plan.id.includes('_week')
+                      ? ' / semana'
+                      : plan.id.includes('_quinzena')
+                      ? ' / 15 dias'
+                      : ' / mês'
+
+                  const isFeaturedMonthly = false
+
+                  return (
+                    <div
+                      key={plan.id}
+                      onClick={() => { setSelectedItem(plan); setStep('payment') }}
+                      style={{
+                        background: '#fff',
+                        borderRadius: 20,
+                        border: `2px solid ${isFeaturedMonthly ? '#fecdd3' : '#e5e7eb'}`,
+                        padding: '28px 32px',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s',
+                        position: 'relative',
+                        overflow: 'hidden'
+                      }}
+                      onMouseEnter={e => {
+                        (e.currentTarget as HTMLDivElement).style.borderColor = '#f43f5e'
+                        ;(e.currentTarget as HTMLDivElement).style.transform = 'translateY(-2px)'
+                        ;(e.currentTarget as HTMLDivElement).style.boxShadow = '0 8px 30px rgba(244,63,94,0.15)'
+                      }}
+                      onMouseLeave={e => {
+                        (e.currentTarget as HTMLDivElement).style.borderColor = isFeaturedMonthly ? '#fecdd3' : '#e5e7eb'
+                        ;(e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)'
+                        ;(e.currentTarget as HTMLDivElement).style.boxShadow = 'none'
+                      }}
+                    >
+                      {isFeaturedMonthly && (
+                        <div style={{
+                          position: 'absolute', top: 16, right: 16,
+                          background: 'linear-gradient(135deg, #f43f5e, #e11d48)',
+                          color: '#fff', fontSize: 11, fontWeight: 700,
+                          padding: '4px 10px', borderRadius: 20
+                        }}>Mais popular</div>
+                      )}
+                      <div style={{ color: getItemColor(plan), marginBottom: 12 }}>{getItemIcon(plan)}</div>
+                      <h3 style={{ fontSize: 18, fontWeight: 700, color: '#1f2937', marginBottom: 4 }}>{plan.title}</h3>
+                      <p style={{ fontSize: 13, color: '#9ca3af', marginBottom: 16 }}>{plan.description}</p>
+                      {/* Preço com original riscado e 50% OFF */}
+                      <div style={{ marginBottom: 6, display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                        <span style={{
+                          fontSize: 13,
+                          color: '#9ca3af',
+                          textDecoration: 'line-through'
+                        }}>
+                          {formatCurrency(original)}
+                        </span>
+                        <span style={{
+                          fontSize: 11,
+                          fontWeight: 700,
+                          color: '#b45309',
+                          background: '#fef9c3',
+                          borderRadius: 999,
+                          padding: '2px 8px'
+                        }}>
+                          50% OFF lançamento
+                        </span>
+                      </div>
+                      <div style={{ fontSize: 32, fontWeight: 800, color: '#f43f5e' }}>
+                        {formatCurrency(plan.amount)}
+                        <span style={{ fontSize: 14, color: '#9ca3af', fontWeight: 400 }}>{periodLabel}</span>
+                      </div>
+                      <div style={{ marginTop: 20, display: 'flex', alignItems: 'center', gap: 6, color: '#f43f5e', fontWeight: 600, fontSize: 14 }}>
+                        Contratar agora <ChevronRight size={16} />
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+              {/* VIP */}
+              <h3 style={{ fontSize: 14, fontWeight: 700, color: '#4b5563', marginBottom: 10, marginTop: 8 }}>VIP</h3>
               <div className="checkout-plans-grid">
-                {PLANS.map(plan => (
-                  <div
-                    key={plan.id}
-                    onClick={() => { setSelectedItem(plan); setStep('payment') }}
-                    style={{
-                      background: '#fff',
-                      borderRadius: 20,
-                      border: `2px solid ${plan.id === 'featured' ? '#fecdd3' : '#e5e7eb'}`,
-                      padding: '28px 32px',
-                      cursor: 'pointer',
-                      transition: 'all 0.2s',
-                      position: 'relative',
-                      overflow: 'hidden'
-                    }}
-                    onMouseEnter={e => {
-                      (e.currentTarget as HTMLDivElement).style.borderColor = '#f43f5e'
-                      ;(e.currentTarget as HTMLDivElement).style.transform = 'translateY(-2px)'
-                      ;(e.currentTarget as HTMLDivElement).style.boxShadow = '0 8px 30px rgba(244,63,94,0.15)'
-                    }}
-                    onMouseLeave={e => {
-                      (e.currentTarget as HTMLDivElement).style.borderColor = plan.id === 'featured' ? '#fecdd3' : '#e5e7eb'
-                      ;(e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)'
-                      ;(e.currentTarget as HTMLDivElement).style.boxShadow = 'none'
-                    }}
-                  >
-                    {plan.id === 'featured' && (
-                      <div style={{
-                        position: 'absolute', top: 16, right: 16,
-                        background: 'linear-gradient(135deg, #f43f5e, #e11d48)',
-                        color: '#fff', fontSize: 11, fontWeight: 700,
-                        padding: '4px 10px', borderRadius: 20
-                      }}>Mais popular</div>
-                    )}
-                    <div style={{ color: getItemColor(plan), marginBottom: 12 }}>{getItemIcon(plan)}</div>
-                    <h3 style={{ fontSize: 18, fontWeight: 700, color: '#1f2937', marginBottom: 4 }}>{plan.title}</h3>
-                    <p style={{ fontSize: 13, color: '#9ca3af', marginBottom: 16 }}>{plan.description}</p>
-                    <div style={{ fontSize: 32, fontWeight: 800, color: '#f43f5e' }}>
-                      {formatCurrency(plan.amount)}
-                      <span style={{ fontSize: 14, color: '#9ca3af', fontWeight: 400 }}>/mês</span>
+                {PLANS.filter(p => p.id.startsWith('featured')).map(plan => {
+                  const original = plan.amount * 2
+                  const periodLabel =
+                    plan.id.includes('_week')
+                      ? ' / semana'
+                      : plan.id.includes('_quinzena')
+                      ? ' / 15 dias'
+                      : ' / mês'
+
+                  const isFeaturedMonthly = plan.id === 'featured'
+
+                  return (
+                    <div
+                      key={plan.id}
+                      onClick={() => { setSelectedItem(plan); setStep('payment') }}
+                      style={{
+                        background: '#fff',
+                        borderRadius: 20,
+                        border: `2px solid ${isFeaturedMonthly ? '#fecdd3' : '#e5e7eb'}`,
+                        padding: '28px 32px',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s',
+                        position: 'relative',
+                        overflow: 'hidden'
+                      }}
+                      onMouseEnter={e => {
+                        (e.currentTarget as HTMLDivElement).style.borderColor = '#f43f5e'
+                        ;(e.currentTarget as HTMLDivElement).style.transform = 'translateY(-2px)'
+                        ;(e.currentTarget as HTMLDivElement).style.boxShadow = '0 8px 30px rgba(244,63,94,0.15)'
+                      }}
+                      onMouseLeave={e => {
+                        (e.currentTarget as HTMLDivElement).style.borderColor = isFeaturedMonthly ? '#fecdd3' : '#e5e7eb'
+                        ;(e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)'
+                        ;(e.currentTarget as HTMLDivElement).style.boxShadow = 'none'
+                      }}
+                    >
+                      {isFeaturedMonthly && (
+                        <div style={{
+                          position: 'absolute', top: 16, right: 16,
+                          background: 'linear-gradient(135deg, #f43f5e, #e11d48)',
+                          color: '#fff', fontSize: 11, fontWeight: 700,
+                          padding: '4px 10px', borderRadius: 20
+                        }}>Mais popular</div>
+                      )}
+                      <div style={{ color: getItemColor(plan), marginBottom: 12 }}>{getItemIcon(plan)}</div>
+                      <h3 style={{ fontSize: 18, fontWeight: 700, color: '#1f2937', marginBottom: 4 }}>{plan.title}</h3>
+                      <p style={{ fontSize: 13, color: '#9ca3af', marginBottom: 16 }}>{plan.description}</p>
+                      {/* Preço com original riscado e 50% OFF */}
+                      <div style={{ marginBottom: 6, display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                        <span style={{
+                          fontSize: 13,
+                          color: '#9ca3af',
+                          textDecoration: 'line-through'
+                        }}>
+                          {formatCurrency(original)}
+                        </span>
+                        <span style={{
+                          fontSize: 11,
+                          fontWeight: 700,
+                          color: '#b45309',
+                          background: '#fef9c3',
+                          borderRadius: 999,
+                          padding: '2px 8px'
+                        }}>
+                          50% OFF lançamento
+                        </span>
+                      </div>
+                      <div style={{ fontSize: 32, fontWeight: 800, color: '#f43f5e' }}>
+                        {formatCurrency(plan.amount)}
+                        <span style={{ fontSize: 14, color: '#9ca3af', fontWeight: 400 }}>{periodLabel}</span>
+                      </div>
+                      <div style={{ marginTop: 20, display: 'flex', alignItems: 'center', gap: 6, color: '#f43f5e', fontWeight: 600, fontSize: 14 }}>
+                        Contratar agora <ChevronRight size={16} />
+                      </div>
                     </div>
-                    <div style={{ marginTop: 20, display: 'flex', alignItems: 'center', gap: 6, color: '#f43f5e', fontWeight: 600, fontSize: 14 }}>
-                      Contratar agora <ChevronRight size={16} />
-                    </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </div>
 

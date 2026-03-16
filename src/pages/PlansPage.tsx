@@ -107,13 +107,30 @@ export default function PlansPage() {
         <p style={{ color: '#6b7280', fontSize: 'clamp(14px, 2vw, 16px)', maxWidth: 480, margin: '0 auto' }}>
           Escolha seu plano mensal e turbine sua visibilidade com pacotes de subida ao topo da listagem.
         </p>
+        {/* Alerta de desconto de lançamento */}
+        <div style={{
+          marginTop: 18,
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 8,
+          padding: '6px 14px',
+          borderRadius: 999,
+          background: '#fef9c3',
+          border: '1px solid #facc15',
+          fontSize: 12,
+          color: '#854d0e',
+          fontWeight: 600,
+        }}>
+          <Clock style={{ width: 13, height: 13 }} />
+          Todos os planos com <span style={{ fontWeight: 800 }}>50% de desconto</span> no mês de lançamento.
+        </div>
       </div>
 
       <div className="plans-inner" style={{ paddingTop: 60, paddingBottom: 60 }}>
 
         {/* ── PLANOS MENSAIS ──────────────────────────────── */}
         <div style={{ marginBottom: 80 }}>
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
+            <div style={{ textAlign: 'center', marginBottom: 40 }}>
             <div style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
               background: '#fff0f2', border: '1px solid #fecdd3',
@@ -153,9 +170,25 @@ export default function PlansPage() {
                 </div>
                 <h3 style={{ fontSize: 20, fontWeight: 800, color: '#fff', marginBottom: 4 }}>Básico</h3>
                 <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', marginBottom: 16 }}>Perfil ativo na plataforma</p>
+                {/* Preço com original riscado e 50% OFF */}
+                <div style={{ marginBottom: 4 }}>
+                  <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', textDecoration: 'line-through', marginRight: 8 }}>
+                    R$ 49
+                  </span>
+                  <span style={{
+                    fontSize: 11,
+                    fontWeight: 700,
+                    color: '#fef3c7',
+                    backgroundColor: 'rgba(250,204,21,0.2)',
+                    borderRadius: 999,
+                    padding: '2px 8px'
+                  }}>
+                    50% OFF lançamento
+                  </span>
+                </div>
                 <div>
                   <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)' }}>R$</span>
-                  <span style={{ fontSize: 38, fontWeight: 900, color: '#fff', margin: '0 4px' }}>49</span>
+                  <span style={{ fontSize: 38, fontWeight: 900, color: '#fff', margin: '0 4px' }}>25</span>
                   <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)' }}>/mês</span>
                 </div>
               </div>
@@ -166,6 +199,7 @@ export default function PlansPage() {
                   'Badge de verificada',
                   'Estatísticas básicas',
                   'Listagem normal',
+                  'Planos semanal e quinzenal disponíveis',
                 ].map(f => (
                   <div key={f} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
                     <div style={{
@@ -177,15 +211,59 @@ export default function PlansPage() {
                     <span style={{ fontSize: 13, color: '#374151' }}>{f}</span>
                   </div>
                 ))}
-                <Link to="/checkout?item=basic" style={{
-                  display: 'block', textAlign: 'center', marginTop: 20,
-                  padding: '12px', borderRadius: 12,
-                  background: '#f1f5f9', color: '#1e293b',
-                  fontWeight: 700, fontSize: 14, textDecoration: 'none',
-                  transition: 'all 0.2s',
-                }}>
-                  Assinar Básico
-                </Link>
+                {/* Opções de duração com desconto */}
+                <div style={{ marginTop: 16, padding: '12px 14px', borderRadius: 12, background: '#f9fafb', border: '1px dashed #e5e7eb' }}>
+                  <p style={{ fontSize: 11, fontWeight: 700, color: '#6b7280', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.06 }}>
+                    Durações disponíveis (50% OFF)
+                  </p>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 8, fontSize: 11, color: '#4b5563' }}>
+                    <div>
+                      <div style={{ fontWeight: 700 }}>Semanal</div>
+                      <div style={{ textDecoration: 'line-through', color: '#9ca3af' }}>R$ 12</div>
+                      <div style={{ fontWeight: 800 }}>R$ 6</div>
+                    </div>
+                    <div>
+                      <div style={{ fontWeight: 700 }}>Quinzenal</div>
+                      <div style={{ textDecoration: 'line-through', color: '#9ca3af' }}>R$ 24</div>
+                      <div style={{ fontWeight: 800 }}>R$ 12</div>
+                    </div>
+                    <div>
+                      <div style={{ fontWeight: 700 }}>Mensal</div>
+                      <div style={{ textDecoration: 'line-through', color: '#9ca3af' }}>R$ 49</div>
+                      <div style={{ fontWeight: 800 }}>R$ 25</div>
+                    </div>
+                  </div>
+                </div>
+                {/* Botões por duração */}
+                <div style={{ marginTop: 16, display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 8 }}>
+                  <Link to="/checkout?item=basic_week" style={{
+                    display: 'block', textAlign: 'center',
+                    padding: '8px 10px', borderRadius: 10,
+                    background: '#eff6ff', color: '#1d4ed8',
+                    fontWeight: 700, fontSize: 12, textDecoration: 'none',
+                    border: '1px solid #bfdbfe'
+                  }}>
+                    Semanal
+                  </Link>
+                  <Link to="/checkout?item=basic_quinzena" style={{
+                    display: 'block', textAlign: 'center',
+                    padding: '8px 10px', borderRadius: 10,
+                    background: '#fefce8', color: '#854d0e',
+                    fontWeight: 700, fontSize: 12, textDecoration: 'none',
+                    border: '1px solid #facc15'
+                  }}>
+                    Quinzenal
+                  </Link>
+                  <Link to="/checkout?item=basic" style={{
+                    display: 'block', textAlign: 'center',
+                    padding: '8px 10px', borderRadius: 10,
+                    background: '#f1f5f9', color: '#111827',
+                    fontWeight: 700, fontSize: 12, textDecoration: 'none',
+                    border: '1px solid #e5e7eb'
+                  }}>
+                    Mensal
+                  </Link>
+                </div>
               </div>
             </div>
 
@@ -216,9 +294,25 @@ export default function PlansPage() {
                 </div>
                 <h3 style={{ fontSize: 20, fontWeight: 800, color: '#fff', marginBottom: 4 }}>Destaque</h3>
                 <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', marginBottom: 16 }}>Máxima visibilidade</p>
+                {/* Preço com original riscado e 50% OFF */}
+                <div style={{ marginBottom: 4 }}>
+                  <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', textDecoration: 'line-through', marginRight: 8 }}>
+                    R$ 99
+                  </span>
+                  <span style={{
+                    fontSize: 11,
+                    fontWeight: 700,
+                    color: '#fef9c3',
+                    backgroundColor: 'rgba(250,204,21,0.25)',
+                    borderRadius: 999,
+                    padding: '2px 8px'
+                  }}>
+                    50% OFF lançamento
+                  </span>
+                </div>
                 <div>
                   <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>R$</span>
-                  <span style={{ fontSize: 38, fontWeight: 900, color: '#fff', margin: '0 4px' }}>99</span>
+                  <span style={{ fontSize: 38, fontWeight: 900, color: '#fff', margin: '0 4px' }}>50</span>
                   <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>/mês</span>
                 </div>
               </div>
@@ -241,15 +335,59 @@ export default function PlansPage() {
                     <span style={{ fontSize: 13, color: '#374151' }}>{f}</span>
                   </div>
                 ))}
-                <Link to="/checkout?item=featured" style={{
-                  display: 'block', textAlign: 'center', marginTop: 20,
-                  padding: '12px', borderRadius: 12,
-                  background: 'linear-gradient(135deg, #e11d48, #be123c)',
-                  color: '#fff', fontWeight: 700, fontSize: 14, textDecoration: 'none',
-                  boxShadow: '0 4px 14px rgba(225,29,72,0.35)',
-                }}>
-                  Assinar Destaque
-                </Link>
+                {/* Opções de duração com desconto */}
+                <div style={{ marginTop: 16, padding: '12px 14px', borderRadius: 12, background: '#fef2f2', border: '1px dashed #fecaca' }}>
+                  <p style={{ fontSize: 11, fontWeight: 700, color: '#b91c1c', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.06 }}>
+                    Durações disponíveis (50% OFF)
+                  </p>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 8, fontSize: 11, color: '#7f1d1d' }}>
+                    <div>
+                      <div style={{ fontWeight: 700 }}>Semanal</div>
+                      <div style={{ textDecoration: 'line-through', color: '#fecaca' }}>R$ 24</div>
+                      <div style={{ fontWeight: 800 }}>R$ 12</div>
+                    </div>
+                    <div>
+                      <div style={{ fontWeight: 700 }}>Quinzenal</div>
+                      <div style={{ textDecoration: 'line-through', color: '#fecaca' }}>R$ 50</div>
+                      <div style={{ fontWeight: 800 }}>R$ 25</div>
+                    </div>
+                    <div>
+                      <div style={{ fontWeight: 700 }}>Mensal</div>
+                      <div style={{ textDecoration: 'line-through', color: '#fecaca' }}>R$ 99</div>
+                      <div style={{ fontWeight: 800 }}>R$ 50</div>
+                    </div>
+                  </div>
+                </div>
+                {/* Botões por duração */}
+                <div style={{ marginTop: 16, display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 8 }}>
+                  <Link to="/checkout?item=featured_week" style={{
+                    display: 'block', textAlign: 'center',
+                    padding: '8px 10px', borderRadius: 10,
+                    background: '#fef9c3', color: '#854d0e',
+                    fontWeight: 700, fontSize: 12, textDecoration: 'none',
+                    border: '1px solid #facc15'
+                  }}>
+                    Semanal
+                  </Link>
+                  <Link to="/checkout?item=featured_quinzena" style={{
+                    display: 'block', textAlign: 'center',
+                    padding: '8px 10px', borderRadius: 10,
+                    background: '#fee2e2', color: '#b91c1c',
+                    fontWeight: 700, fontSize: 12, textDecoration: 'none',
+                    border: '1px solid #fecaca'
+                  }}>
+                    Quinzenal
+                  </Link>
+                  <Link to="/checkout?item=featured" style={{
+                    display: 'block', textAlign: 'center',
+                    padding: '8px 10px', borderRadius: 10,
+                    background: 'linear-gradient(135deg, #e11d48, #be123c)',
+                    color: '#fff', fontWeight: 700, fontSize: 12, textDecoration: 'none',
+                    boxShadow: '0 4px 14px rgba(225,29,72,0.35)'
+                  }}>
+                    Mensal
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -351,7 +489,9 @@ export default function PlansPage() {
 
                 {/* Cards dos pacotes */}
                 <div className="plans-boost-inner">
-                  {group.packages.map((pkg, i) => (
+                  {group.packages.map((pkg, i) => {
+                    const original = pkg.price * 2
+                    return (
                     <div key={i} className="plans-boost-card" style={{
                       padding: '24px 16px',
                       position: 'relative',
@@ -380,11 +520,27 @@ export default function PlansPage() {
                       <div style={{ fontSize: 11, color: '#9ca3af', marginBottom: 14 }}>
                         {pkg.days === 1 ? 'dia' : 'dias'}
                       </div>
+                      {/* Preço original riscado + 50% OFF */}
+                      <div style={{ marginBottom: 4 }}>
+                        <span style={{ fontSize: 11, color: '#9ca3af', textDecoration: 'line-through', marginRight: 6 }}>
+                          R$ {original.toFixed(2).replace('.', ',')}
+                        </span>
+                        <span style={{
+                          fontSize: 10,
+                          fontWeight: 700,
+                          color: '#b45309',
+                          background: '#fef9c3',
+                          borderRadius: 999,
+                          padding: '2px 6px'
+                        }}>
+                          50% OFF
+                        </span>
+                      </div>
                       <div style={{
                         fontSize: 22, fontWeight: 900,
                         color: group.color, marginBottom: 4,
                       }}>
-                        R$ {pkg.price}
+                        R$ {pkg.price.toFixed(2).replace('.', ',')}
                       </div>
                       <div style={{ fontSize: 10, color: '#9ca3af', marginBottom: 16 }}>
                         R$ {(pkg.price / pkg.days).toFixed(2).replace('.', ',')}/dia
@@ -401,7 +557,7 @@ export default function PlansPage() {
                         Contratar
                       </Link>
                     </div>
-                  ))}
+                  )})}
                 </div>
               </div>
             ))}
@@ -468,8 +624,22 @@ export default function PlansPage() {
               padding: '28px', minWidth: 240, textAlign: 'center',
               flexShrink: 0,
             }}>
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', marginBottom: 6 }}>
-                R$ 5 / dia
+              {/* Preço diário com desconto */}
+              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', marginBottom: 4 }}>
+                <span style={{ textDecoration: 'line-through', marginRight: 6, opacity: 0.8 }}>R$ 10 / dia</span>
+                <span style={{
+                  fontSize: 11,
+                  fontWeight: 700,
+                  color: '#fef9c3',
+                  backgroundColor: 'rgba(250,204,21,0.25)',
+                  borderRadius: 999,
+                  padding: '2px 8px'
+                }}>
+                  50% OFF lançamento
+                </span>
+              </div>
+              <div style={{ fontSize: 13, color: '#c4b5fd', marginBottom: 20 }}>
+                Agora por <strong style={{ color: '#fff' }}>R$ 5 / dia</strong>
               </div>
               <div style={{ fontSize: 13, color: '#c4b5fd', marginBottom: 20 }}>
                 Calcule seu período:
@@ -496,6 +666,9 @@ export default function PlansPage() {
                 padding: '14px', marginBottom: 16,
               }}>
                 <div style={{ fontSize: 11, color: '#c4b5fd', marginBottom: 4 }}>Total</div>
+                <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', marginBottom: 2 }}>
+                  De <span style={{ textDecoration: 'line-through' }}>R$ {(10 * multimidiaDays).toFixed(2).replace('.', ',')}</span>
+                </div>
                 <div style={{ fontSize: 32, fontWeight: 900, color: '#fff' }}>
                   R$ {(5 * multimidiaDays).toFixed(2).replace('.', ',')}
                 </div>

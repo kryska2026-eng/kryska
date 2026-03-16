@@ -556,7 +556,7 @@ export default function AdvertisePage() {
             <div style={{ backgroundColor: '#fff', borderRadius: 20, border: '1px solid #f1f5f9', boxShadow: '0 2px 16px rgba(0,0,0,0.05)', padding: 32 }}>
               <div style={{ marginBottom: 24 }}>
                 <h2 style={{ fontSize: 22, fontWeight: 800, color: '#1a0a10', marginBottom: 6 }}>Fotos do perfil</h2>
-                <p style={{ fontSize: 14, color: '#94a3b8' }}>Mínimo 1 foto, máximo 8. A logo Kryska será adicionada automaticamente.</p>
+                <p style={{ fontSize: 14, color: '#94a3b8' }}>Mínimo 1 foto, máximo 8. Use JPG ou PNG. No iPhone, escolha “Mais opções” e selecione uma foto em JPG se der erro.</p>
               </div>
 
               {/* Info marca d'água + Cloudinary */}
@@ -593,7 +593,7 @@ export default function AdvertisePage() {
                     Arraste as fotos ou clique para selecionar
                   </p>
                   <p style={{ fontSize: 12, color: '#94a3b8' }}>JPG, PNG · Máximo 10MB por foto · {photos.length}/8 fotos</p>
-                  <input ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={handlePhotoInput} />
+                  <input ref={fileInputRef} type="file" accept="image/jpeg,image/png,image/webp" multiple className="hidden" onChange={handlePhotoInput} />
                 </div>
               )}
 
@@ -635,11 +635,12 @@ export default function AdvertisePage() {
                         </div>
                       )}
 
-                      {/* Badge de erro */}
+                      {/* Badge de erro + mensagem */}
                       {photo.error && (
-                        <div style={{ position: 'absolute', top: 6, left: 6, backgroundColor: '#ef4444', borderRadius: 50, padding: '2px 6px', display: 'flex', alignItems: 'center', gap: 3 }}>
-                          <AlertCircle size={10} color="#fff" />
-                          <span style={{ fontSize: 9, color: '#fff', fontWeight: 700 }}>Erro</span>
+                        <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(239,68,68,0.92)', borderRadius: 12, padding: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                          <AlertCircle size={20} color="#fff" />
+                          <span style={{ fontSize: 11, color: '#fff', fontWeight: 700, textAlign: 'center' }}>Erro no envio</span>
+                          <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.95)', textAlign: 'center', lineHeight: 1.3 }}>{photo.error}</span>
                         </div>
                       )}
 

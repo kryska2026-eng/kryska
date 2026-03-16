@@ -1,5 +1,12 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
+/**
+ * Mercado Pago — Produção
+ * Variáveis obrigatórias no Vercel:
+ * - MP_ACCESS_TOKEN: Access Token de produção (Credenciais > Produção no painel MP)
+ * - PUBLIC_URL: URL do site (ex: https://www.kryska.com.br) para back_urls
+ */
+
 interface PlanItemPayload {
   id: string;
   title: string;
@@ -18,7 +25,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const accessToken = process.env.MP_ACCESS_TOKEN;
 
   if (!accessToken) {
-    return res.status(500).json({ error: 'MP_ACCESS_TOKEN not configured' });
+    return res.status(500).json({ error: 'MP_ACCESS_TOKEN não configurado. Defina em Vercel > Settings > Environment Variables.' });
   }
 
   try {
@@ -32,7 +39,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ error: 'Missing item or userEmail' });
     }
 
-    const baseUrl = process.env.PUBLIC_URL || 'https://kryska.vercel.app';
+    const baseUrl = process.env.PUBLIC_URL || 'https://www.kryska.com.br';
 
     const body = {
       items: [

@@ -30,17 +30,45 @@ export interface PlanItem {
 // ============================================
 export const PLANS: PlanItem[] = [
   {
+    id: 'basic_week',
+    title: 'Plano Básico Semanal',
+    description: 'Anúncio ativo por 7 dias',
+    amount: 6.00,
+    type: 'plan'
+  },
+  {
+    id: 'basic_quinzena',
+    title: 'Plano Básico Quinzenal',
+    description: 'Anúncio ativo por 15 dias',
+    amount: 12.00,
+    type: 'plan'
+  },
+  {
     id: 'basic',
-    title: 'Plano Básico',
+    title: 'Plano Básico Mensal',
     description: 'Anúncio mensal na Kryska',
-    amount: 49.00,
+    amount: 25.00,
+    type: 'plan'
+  },
+  {
+    id: 'featured_week',
+    title: 'Plano Destaque Semanal',
+    description: 'Anúncio em destaque por 7 dias',
+    amount: 12.00,
+    type: 'plan'
+  },
+  {
+    id: 'featured_quinzena',
+    title: 'Plano Destaque Quinzenal',
+    description: 'Anúncio em destaque por 15 dias',
+    amount: 25.00,
     type: 'plan'
   },
   {
     id: 'featured',
-    title: 'Plano Destaque',
+    title: 'Plano Destaque Mensal',
     description: 'Anúncio em destaque mensal na Kryska',
-    amount: 99.00,
+    amount: 50.00,
     type: 'plan'
   }
 ]
@@ -83,7 +111,9 @@ export function useMercadoPago() {
   const [error, setError] = useState<string | null>(null)
   const [preference, setPreference] = useState<MPPreference | null>(null)
 
-  const publicKey = import.meta.env.VITE_MP_PUBLIC_KEY || 'TEST-public-key'
+  // Produção: use chave pública de produção e não defina VITE_MP_SANDBOX (ou use 'false').
+  // Testes: defina VITE_MP_SANDBOX=true e use chaves de teste do Mercado Pago.
+  const publicKey = import.meta.env.VITE_MP_PUBLIC_KEY || ''
   const isSandbox = import.meta.env.VITE_MP_SANDBOX === 'true'
 
   // Cria preferência de pagamento chamando o backend
@@ -123,6 +153,7 @@ export function useMercadoPago() {
     }
   }
 
+  // Produção: usa init_point (checkout real). Sandbox: usa sandbox_init_point.
   const getCheckoutUrl = (pref: MPPreference) => {
     return isSandbox ? pref.sandbox_init_point : pref.init_point
   }
